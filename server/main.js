@@ -5,7 +5,7 @@ app.use(express.static("../client"));
 
 var server = app.listen(3000);
 
-var io = require("socket.io")(app);
+var io = require("socket.io")(server);
 
 class Player {
   constructor(socket = null) {

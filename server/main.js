@@ -1,8 +1,7 @@
 var express = require("express");
 var app = express();
 
-console.log(__dirname.slice(__dirname.length - 6, __dirname.length) + "client");
-app.use(express.static(__dirname.slice(__dirname.length - 6, __dirname.length) + "client"));
+app.use(express.static(require("path").join(__dirname, "../client")));
 
 var server = app.listen(3000);
 

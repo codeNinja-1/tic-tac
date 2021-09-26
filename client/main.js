@@ -8,15 +8,18 @@ function setGameState(data) {
   state_you.style.display = "none";
   state_other.style.display = "none";
   state_none.style.display = "none";
-  state_done_smile.style.display = "none";
-  state_done_frown.style.display = "none";
+  state_win.style.display = "none";
+  state_loss.style.display = "none";
+  state_tie.style.display = "none";
 
  // Update the communicatin of the state of the game.
   if (winner != null) {
     if (winner == "other") {
-      state_done_frown.style.display = "block";
+      state_loss.style.display = "block";
+    } else if(winner == "you") {
+      state_win.style.display = "block";
     } else {
-      state_done_smile.style.display = "block";
+      state_tie.style.display = "block";
     }
   } else {
       if (data.turn == true) {

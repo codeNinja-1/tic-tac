@@ -32,7 +32,7 @@ class Game {
       if (this.board[position] == 0) {
         this.board[position] = this.which(player);
         this.turn = this.turn == 2 ? 1 : 2;
-        this.sendBoard();
+        this.sendBoard(player);
       }
     }
   }
@@ -45,9 +45,9 @@ class Game {
       game.play(player, x + y * 3);
     });
   }
-  sendBoard() {
-    this.player1.socket.emit("gameState", {turn:this.turn, board:this.board});
-    this.player2.socket.emit("gameState", {turn:this.turn, board:this.board});
+  sendBoard(player) {
+    this.player1.socket.emit("gameState", this.gameOver ? null : this.turn == this.which(player), this.board);
+    this.player2.socket.emit("gameState", this.gameOver ? null : this.turn == this.which(player), this.board);
   }
 }
 

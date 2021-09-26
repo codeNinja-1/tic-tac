@@ -1,5 +1,13 @@
 # Tic Tac Toe
 
+## Usage
+
+```
+npm install express
+npm install socket.io
+node server/server.js
+```
+
 ## API
 
 ### Client -> Server messages

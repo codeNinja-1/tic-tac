@@ -14,4 +14,4 @@
 
 * gameState
   * turn : one of "you", "other", "none"
-  * board : list of 9 numbers, where 0 = empty, 1 = x, 2 = y
+  * board : list of 9 numbers, where 0 = empty, 1 = x, 2 = o

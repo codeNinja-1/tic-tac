@@ -74,7 +74,12 @@ class Game {
     if (board[2] == board[4] && board[2] == board[6] && board[2] != 0) {
       return board[2];
     }
+    for (var i = 0; i < board.length; i++) {
+      if (board[i] != 0) return null;
+    }
     return 0;
+    
+    // 1 = player 1, 2 = player 2, 0 = tie, null = nobody has won yet
   }
 }
 

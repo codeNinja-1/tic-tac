@@ -20,6 +20,8 @@ class Game {
     this.registerEvents(this.player1);
     this.registerEvents(this.player2);
     this.turn = Math.round(Math.random()) + 1;
+    this.gameOver = false;
+    this.winner = null;
     this.board = [
       0, 0, 0,
       0, 0, 0,
@@ -28,10 +30,15 @@ class Game {
     // 0 = blank, 1 = player 1, 2 = player 2
   }
   play(player, position) {
-    if (this.which(player) == this.turn) {
+    if (this.which(player) == this.turn && !this.gameOver) {
       if (this.board[position] == 0) {
         this.board[position] = this.which(player);
         this.turn = this.turn == 2 ? 1 : 2;
+        let res = this.result();
+        if (res != 0) {
+          this.gameOver = true;
+          this.winner = res;
+        }
         this.sendBoard(player);
       }
     }
@@ -49,7 +56,8 @@ class Game {
     this.player1.socket.emit("gameState", this.gameOver ? null : this.turn == this.which(player), this.board);
     this.player2.socket.emit("gameState", this.gameOver ? null : this.turn == this.which(player), this.board);
   }
-  result(board) {
+  result() {
+    let board = this.board;
     for (var i = 0;i < 3;i++) {
       if (board[i * 3] == board[i * 3 + 1] && board[i * 3] == board[i * 3 + 2] && board[i * 3] != 0) {
         return board[i * 3];

@@ -41,13 +41,13 @@ class Game {
   }
   registerEvents(player) {
     var game = this;
-    player.socket.on("move", function(position) {
-      game.play(position);
+    player.socket.on("makeMove", function(x, y) {
+      game.play(player, x + y * 3);
     });
   }
   sendBoard() {
-    this.player1.socket.emit("board", {turn:this.turn, board:this.board});
-    this.player2.socket.emit("board", {turn:this.turn, board:this.board});
+    this.player1.socket.emit("gameState", {turn:this.turn, board:this.board});
+    this.player2.socket.emit("gameState", {turn:this.turn, board:this.board});
   }
 }
 
@@ -55,7 +55,7 @@ var unpaired = [];
 
 io.on("connection", function(socket) {
   var player = new Player(socket);
-  socket.on("enter", function() {
+  socket.on("readyToPlay", function() {
     unpaired.push(player);
     tryPair();
   });

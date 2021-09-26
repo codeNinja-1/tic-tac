@@ -1,3 +1,9 @@
+var socket = io();
+
+socket.on("gameState", function(turn, board, winner) {
+  setGameState({turn:turn, board:board});
+});
+
 function setGameState(data) {
   state_you.style.display = "none";
   state_other.style.display = "none";
@@ -15,7 +21,7 @@ function setGameState(data) {
 function readyToPlay() {
   data = {};
 
-  // emit readyToPlay event
+  socket.emit("readyToPlay");
 }
 
 function makeMove(x, y) {
@@ -24,7 +30,7 @@ function makeMove(x, y) {
     "y" : y,
   }
 
-  // emit makeMove event
+  socket.emit("makeMove", x, y);
 }
 
 function clickCell(event) {

@@ -52,9 +52,9 @@ class Game {
       game.play(player, x + y * 3);
     });
   }
-  sendBoard(player) {
-    this.player1.socket.emit("gameState", this.gameOver ? null : this.turn == this.which(player), this.board);
-    this.player2.socket.emit("gameState", this.gameOver ? null : this.turn == this.which(player), this.board);
+  sendBoard() {
+    this.player1.socket.emit("gameState", this.gameOver ? null : this.turn == 1, this.board, this.winner != null ? this.winner == 1 : null);
+    this.player2.socket.emit("gameState", this.gameOver ? null : this.turn == 2, this.board, this.winner != null ? this.winner == 2 : null);
   }
   result() {
     let board = this.board;

@@ -12,8 +12,8 @@ function setGameState(data) {
   state_done_frown.style.display = "none";
 
  // Update the communicatin of the state of the game.
-  if (winner != null) {
-    if (winner == "other") {
+  if (data.winner != null) {
+    if (data.winner == "other") {
       state_done_frown.style.display = "block";
     } else {
       state_done_smile.style.display = "block";

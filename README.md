@@ -13,5 +13,5 @@
 ### Server -> Client messages
 
 * gameState
-  * turn : one of "you", "other", "over"
+  * turn : one of "you", "other", "none"
   * board : string of nine o, x, and _

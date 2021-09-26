@@ -28,11 +28,12 @@ class Game {
     // 0 = blank, 1 = player 1, 2 = player 2
   }
   play(player, position) {
-    if (which(player) == this.turn) {
+    if (this.which(player) == this.turn) {
       if (this.board[position] == 0) {
         this.board[position] = this.which(player);
+        this.turn = this.turn == 2 ? 1 : 2;
+        this.sendBoard();
       }
-      this.turn = this.turn == 2 ? 1 : 2;
     }
   }
   which(player) {
@@ -43,6 +44,10 @@ class Game {
     player.socket.on("move", function(position) {
       game.play(position);
     });
+  }
+  sendBoard() {
+    this.player1.socket.emit("board", {turn:this.turn, board:this.board});
+    this.player2.socket.emit("board", {turn:this.turn, board:this.board});
   }
 }
 

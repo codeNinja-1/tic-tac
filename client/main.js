@@ -1,14 +1,25 @@
 var socket = io();
 
 socket.on("gameState", function(turn, board, winner) {
-  setGameState({turn:turn, board:board});
+  setGameState({turn:turn, board:board, winner:winner});
 });
 
 function setGameState(data) {
   state_you.style.display = "none";
   state_other.style.display = "none";
   state_none.style.display = "none";
+  state_done_smile.style.display = "none";
+  state_done_frown.style.display = "none";
 
+  if (winner != null) {
+    // We have a winner!  Let's display a happy face to this client
+    // if they are the winner and a sad face if they aren't.
+    if (winner == "other") {
+      state_done_frown.style.display = "block";
+    } else {
+      state_done_smile.style.display = "block";
+    }
+  }
   if (data.turn == true) {
     state_you.style.display = "block";
   } else if (data.turn == false) {
@@ -16,7 +27,7 @@ function setGameState(data) {
   } else {
     state_none.style.display = "block";
   }
-  
+
   for (var row = 0; row < 3; ++row) {
     for (var col = 0; col < 3; ++col) {
       var val = data.board[row * 3 + col];
@@ -27,7 +38,6 @@ function setGameState(data) {
         img.src = "newo.svg";
       } else {
         img.src = "";
-      }
     }
   }
 }

@@ -36,9 +36,9 @@ function setGameState(data) {
         var val = data.board[row * 3 + col];
         var img = gameboard.rows[row].cells[col].firstChild;
         if (val == "x") {
-          img.src = "newx.svg";
+          img.src = "assets/newx.svg";
         } else if (val == "o"){
-          img.src = "newo.svg";
+          img.src = "assets/newo.svg";
         } else {
           img.src = "";
         }

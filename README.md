@@ -23,3 +23,4 @@ node server/server.js
 * gameState
   * turn : one of true (your turn), false (other player's turn), null (between games)
   * board : list of 9 numbers, where 0 = empty, 1 = x, 2 = o
+  * winner : one of "you", "other", "tie", or null (nobody has won yet)

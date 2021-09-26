@@ -3,7 +3,7 @@ var app = express();
 
 app.use(express.static("../client"));
 
-var server = app.start(3000);
+var server = app.listen(3000);
 
 var io = require("socket.io")(app);
 

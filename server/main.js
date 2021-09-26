@@ -35,7 +35,7 @@ class Game {
         this.board[position] = this.which(player);
         this.turn = this.turn == 2 ? 1 : 2;
         let res = this.result();
-        if (res != 0) {
+        if (res != null) {
           this.gameOver = true;
           this.winner = res;
         }
@@ -53,8 +53,8 @@ class Game {
     });
   }
   sendBoard() {
-    this.player1.socket.emit("gameState", this.gameOver ? null : this.turn == 1, this.board, this.winner != null ? this.winner == 1 : null);
-    this.player2.socket.emit("gameState", this.gameOver ? null : this.turn == 2, this.board, this.winner != null ? this.winner == 2 : null);
+    this.player1.socket.emit("gameState", this.gameOver ? null : this.turn == 1, this.board, this.winner == 0 ? "tie" : this.winner != null ? (this.winner == 1 ? "you" : "other") : null);
+    this.player2.socket.emit("gameState", this.gameOver ? null : this.turn == 2, this.board, this.winner == 0 ? "tie" : this.winner != null ? (this.winner == 2 ? "you" : "other") : null);
   }
   result() {
     let board = this.board;
@@ -74,7 +74,12 @@ class Game {
     if (board[2] == board[4] && board[2] == board[6] && board[2] != 0) {
       return board[2];
     }
+    for (var i = 0; i < board.length; i++) {
+      if (board[i] != 0) return null;
+    }
     return 0;
+    
+    // 1 = player 1, 2 = player 2, 0 = tie, null = nobody has won yet
   }
 }
 

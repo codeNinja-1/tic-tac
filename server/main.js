@@ -20,6 +20,8 @@ class Game {
     this.registerEvents(this.player1);
     this.registerEvents(this.player2);
     this.turn = Math.round(Math.random()) + 1;
+    this.gameOver = false;
+    this.winner = null;
     this.board = [
       0, 0, 0,
       0, 0, 0,
@@ -28,10 +30,15 @@ class Game {
     // 0 = blank, 1 = player 1, 2 = player 2
   }
   play(player, position) {
-    if (this.which(player) == this.turn) {
+    if (this.which(player) == this.turn && !this.gameOver) {
       if (this.board[position] == 0) {
         this.board[position] = this.which(player);
         this.turn = this.turn == 2 ? 1 : 2;
+        let res = this.result();
+        if (res != 0) {
+          this.gameOver = true;
+          this.winner = res;
+        }
         this.sendBoard(player);
       }
     }
@@ -45,9 +52,29 @@ class Game {
       game.play(player, x + y * 3);
     });
   }
-  sendBoard(player) {
-    this.player1.socket.emit("gameState", this.gameOver ? null : this.turn == this.which(player), this.board);
-    this.player2.socket.emit("gameState", this.gameOver ? null : this.turn == this.which(player), this.board);
+  sendBoard() {
+    this.player1.socket.emit("gameState", this.gameOver ? null : this.turn == 1, this.board, this.winner != null ? this.winner == 1 : null);
+    this.player2.socket.emit("gameState", this.gameOver ? null : this.turn == 2, this.board, this.winner != null ? this.winner == 2 : null);
+  }
+  result() {
+    let board = this.board;
+    for (var i = 0;i < 3;i++) {
+      if (board[i * 3] == board[i * 3 + 1] && board[i * 3] == board[i * 3 + 2] && board[i * 3] != 0) {
+        return board[i * 3];
+      }
+    }
+    for (var i = 0;i < 3;i++) {
+      if (board[i] == board[i + 3] && board[i] == board[i + 6] && board[i] != 0) {
+        return board[i];
+      }
+    }
+    if (board[0] == board[4] && board[0] == board[8] && board[0] != 0) {
+      return board[0];
+    }
+    if (board[2] == board[4] && board[2] == board[6] && board[2] != 0) {
+      return board[2];
+    }
+    return 0;
   }
 }
 

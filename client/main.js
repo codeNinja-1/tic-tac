@@ -13,10 +13,10 @@ function setGameState(data) {
   state_tie.style.display = "none";
 
  // Update the communicatin of the state of the game.
-  if (winner != null) {
-    if (winner == "other") {
+  if (data.winner != null) {
+    if (data.winner == "other") {
       state_loss.style.display = "block";
-    } else if(winner == "you") {
+    } else if(data.winner == "you") {
       state_win.style.display = "block";
     } else {
       state_tie.style.display = "block";

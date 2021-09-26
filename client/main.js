@@ -11,36 +11,37 @@ function setGameState(data) {
   state_done_smile.style.display = "none";
   state_done_frown.style.display = "none";
 
+ // Update the communicatin of the state of the game.
   if (winner != null) {
-    // We have a winner!  Let's display a happy face to this client
-    // if they are the winner and a sad face if they aren't.
     if (winner == "other") {
       state_done_frown.style.display = "block";
     } else {
       state_done_smile.style.display = "block";
     }
-  }
-  if (data.turn == true) {
-    state_you.style.display = "block";
-  } else if (data.turn == false) {
-    state_other.style.display = "block";
   } else {
-    state_none.style.display = "block";
-  }
-
-  for (var row = 0; row < 3; ++row) {
-    for (var col = 0; col < 3; ++col) {
-      var val = data.board[row * 3 + col];
-      var img = gameboard.rows[row].cells[col].firstChild;
-      if (val == "x") {
-        img.src = "newx.svg";
-      } else if (val == "o"){
-        img.src = "newo.svg";
+      if (data.turn == true) {
+        state_you.style.display = "block";
+      } else if (data.turn == false) {
+        state_other.style.display = "block";
       } else {
-        img.src = "";
+        state_none.style.display = "block";
+      }
+    }
+
+    for (var row = 0; row < 3; ++row) {
+      for (var col = 0; col < 3; ++col) {
+        var val = data.board[row * 3 + col];
+        var img = gameboard.rows[row].cells[col].firstChild;
+        if (val == "x") {
+          img.src = "newx.svg";
+        } else if (val == "o"){
+          img.src = "newo.svg";
+        } else {
+          img.src = "";
+        }
+      }
     }
   }
-}
 
 function readyToPlay() {
   data = {};

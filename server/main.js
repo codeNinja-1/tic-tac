@@ -76,7 +76,7 @@ class Game {
       return board[2];
     }
     for (var i = 0; i < board.length; i++) {
-      if (board[i] != 0) return null;
+      if (board[i] == 0) return null;
     }
     return 0;
     

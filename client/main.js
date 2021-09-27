@@ -31,13 +31,15 @@ function setGameState(data) {
       }
     }
 
+    console.log("setGameState", data)
     for (var row = 0; row < 3; ++row) {
       for (var col = 0; col < 3; ++col) {
         var val = data.board[row * 3 + col];
         var img = gameboard.rows[row].cells[col].firstChild;
-        if (val == "x") {
+        console.log(img, val);
+        if (val == 1) {
           img.src = "assets/newx.svg";
-        } else if (val == "o"){
+        } else if (val == 2){
           img.src = "assets/newo.svg";
         } else {
           img.src = "";
@@ -48,6 +50,8 @@ function setGameState(data) {
 
 function readyToPlay() {
   data = {};
+
+  console.log("Ready to play");
 
   socket.emit("readyToPlay");
 }

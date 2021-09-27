@@ -1,4 +1,4 @@
-var socket = io();  // test at 4:44
+var socket = io();  // test at 9:37
 
 socket.on("gameState", function(turn, board, winner) {
   setGameState({turn:turn, board:board, winner:winner});

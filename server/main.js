@@ -27,6 +27,7 @@ class Game {
       0, 0, 0,
       0, 0, 0
     ];
+    this.sendBoard();
     // 0 = blank, 1 = player 1, 2 = player 2
   }
   play(player, position) {
@@ -94,6 +95,7 @@ io.on("connection", function(socket) {
 });
 
 function tryPair() {
+  console.log("trying pair", unpaired, Math.floor(unpaired.length / 2) * 2);
   for (var i = 0; i < Math.floor(unpaired.length / 2) * 2; i += 2) {
     var game = new Game(unpaired[i], unpaired[i + 1]);
     unpaired.splice(i, 2);

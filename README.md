@@ -3,8 +3,9 @@
 ## Usage
 
 ```sh
-npm install express
-npm install socket.io
+# Install
+git clone https://github.com/codeNinja-1/tic-tac.git && cd tic-tac
+# Run
 node server/server.js
 ```
 

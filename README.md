@@ -4,7 +4,7 @@
 
 ```sh
 # Install
-git clone https://github.com/codeNinja-1/tic-tac.git && cd tic-tac
+git clone https://github.com/codeNinja-1/tic-tac.git && cd tic-tac && npm install
 # Run
 node server/server.js
 ```

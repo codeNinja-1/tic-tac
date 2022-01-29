@@ -9,3 +9,4 @@ git clone https://github.com/codeNinja-1/tic-tac.git && cd tic-tac && npm i expr
 # Run
 node server/main.js
 ```
+Go to localhost:3000 to play.

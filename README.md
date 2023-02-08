@@ -13,4 +13,4 @@ npm i socket.io
 # Launch node
 node server/main.js
 ```
-Go to localhost:3000 to play.
+Go to [localhost:3000](http://localhost:3000) to play.

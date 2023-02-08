@@ -1,6 +1,4 @@
 # Tic Tac Toe
-*This repository was a test. It is no longer updated.*
-
 ## Usage
 
 ```sh
